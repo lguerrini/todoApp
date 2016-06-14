@@ -6,38 +6,36 @@
 package it.java858.todoapp.service;
 
 import it.java858.todoapp.entity.Categoria;
-import it.java858.todoapp.entity.ToDo;
 import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
  *
- * @author tss
+ * @author alfonso
  */
-public class ToDoService {
+public class CategoriaService {
 
-    private ToDoService() {
-    }
-
-    public static ToDo save(ToDo toSave) {
+    public static void elimina(Categoria c) {
         EntityManager em = DbService.getEm();
         em.getTransaction().begin();
-        ToDo saved = em.merge(toSave);
+        em.remove(c);
+        em.getTransaction().commit();
+    }
+
+    private CategoriaService() {
+    }
+
+    public static Categoria save(Categoria c) {
+        EntityManager em = DbService.getEm();
+        em.getTransaction().begin();
+        Categoria saved = em.merge(c);
         em.getTransaction().commit();
         return saved;
     }
 
-    public static List<ToDo> findByCategoria(Categoria c){
+    public static List<Categoria> findAll() {
         EntityManager em = DbService.getEm();
-        return em.createQuery("select e from ToDo e where :p MEMBER OF e.categorie", ToDo.class)
-                .setParameter("p", c)
+        return em.createQuery("select e from Categoria e order by e.nome", Categoria.class)
                 .getResultList();
-    }
-    
-    public static void delete(ToDo todo){
-        EntityManager em = DbService.getEm();
-        em.getTransaction().begin();
-        em.remove(todo);
-        em.getTransaction().commit();
     }
 }

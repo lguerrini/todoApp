@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,6 +39,11 @@ public class ToDo implements Serializable {
     @ManyToMany
     private Set<Categoria> categorie = new HashSet<>();
 
+    public ToDo() {
+        dataCreazione = new Date();
+    }
+
+    
     public Long getId() {
         return id;
     }

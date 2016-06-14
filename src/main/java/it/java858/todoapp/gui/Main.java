@@ -5,6 +5,7 @@
  */
 package it.java858.todoapp.gui;
 
+import it.java858.todoapp.entity.Categoria;
 import it.java858.todoapp.entity.ToDo;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -53,6 +54,9 @@ public class Main extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnuEsci = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        mnuGestioneCategorie = new javax.swing.JMenuItem();
+        mnuCreaCategoria = new javax.swing.JMenuItem();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -115,6 +119,26 @@ public class Main extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setText("Gestione Categorie");
+
+        mnuGestioneCategorie.setText("Crea");
+        mnuGestioneCategorie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuGestioneCategorieActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnuGestioneCategorie);
+
+        mnuCreaCategoria.setText("Gestisci");
+        mnuCreaCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuCreaCategoriaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnuCreaCategoria);
+
+        jMenuBar1.add(jMenu2);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -170,17 +194,32 @@ public class Main extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Eliminare il todo selezionato");
     }//GEN-LAST:event_cmdEliminaActionPerformed
 
+    private void mnuGestioneCategorieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuGestioneCategorieActionPerformed
+        CategoriaEdit edit = new CategoriaEdit(new Categoria(), this, true);
+        edit.setLocationRelativeTo(this);
+        edit.setVisible(true);
+    }//GEN-LAST:event_mnuGestioneCategorieActionPerformed
+
+    private void mnuCreaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCreaCategoriaActionPerformed
+        CategoriaCRUD  crud = new  CategoriaCRUD(this, true);
+        crud.setLocationRelativeTo(this);
+        crud.setVisible(true);
+    }//GEN-LAST:event_mnuCreaCategoriaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdElimina;
     private javax.swing.JButton cmdModifica;
     private javax.swing.JButton cmdNuovo;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JMenuItem mnuCreaCategoria;
     private javax.swing.JMenuItem mnuEsci;
+    private javax.swing.JMenuItem mnuGestioneCategorie;
     // End of variables declaration//GEN-END:variables
 }

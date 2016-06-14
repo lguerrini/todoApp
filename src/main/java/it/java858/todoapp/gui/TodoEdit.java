@@ -5,16 +5,13 @@
  */
 package it.java858.todoapp.gui;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import it.java858.todoapp.entity.ToDo;
-import java.awt.Dialog;
 import java.awt.Frame;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 
