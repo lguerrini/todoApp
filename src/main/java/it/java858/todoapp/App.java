@@ -6,6 +6,8 @@
 package it.java858.todoapp;
 
 import it.java858.todoapp.gui.Main;
+import it.java858.todoapp.service.DbService;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -15,6 +17,7 @@ public class App {
 
     public static void main(String[] args) {
              
+        EntityManager em = DbService.getEm();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

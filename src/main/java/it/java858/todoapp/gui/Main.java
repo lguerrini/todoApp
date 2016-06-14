@@ -5,17 +5,33 @@
  */
 package it.java858.todoapp.gui;
 
+import it.java858.todoapp.entity.ToDo;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author tss
  */
 public class Main extends javax.swing.JFrame {
 
+    private ToDo selectedTodo;
+
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
+        // make the frame half the height and width
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int height = screenSize.height;
+        int width = screenSize.width;
+        this.setSize(width / 2, height / 2);
+
+        // center the jframe on screen
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -31,6 +47,9 @@ public class Main extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        cmdNuovo = new javax.swing.JButton();
+        cmdModifica = new javax.swing.JButton();
+        cmdElimina = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnuEsci = new javax.swing.JMenuItem();
@@ -63,7 +82,26 @@ public class Main extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        getContentPane().add(jScrollPane2, java.awt.BorderLayout.CENTER);
+        cmdNuovo.setText("Nuovo");
+        cmdNuovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdNuovoActionPerformed(evt);
+            }
+        });
+
+        cmdModifica.setText("Modifica");
+        cmdModifica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdModificaActionPerformed(evt);
+            }
+        });
+
+        cmdElimina.setText("Elimina");
+        cmdElimina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdEliminaActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
 
@@ -79,6 +117,30 @@ public class Main extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(cmdNuovo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmdModifica)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmdElimina)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmdNuovo)
+                    .addComponent(cmdModifica)
+                    .addComponent(cmdElimina)))
+        );
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -86,8 +148,33 @@ public class Main extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_mnuEsciActionPerformed
 
+    private void cmdNuovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNuovoActionPerformed
+        TodoEdit edit = new TodoEdit(this, true);
+        edit.setLocationRelativeTo(this);
+        edit.setVisible(true);
+    }//GEN-LAST:event_cmdNuovoActionPerformed
+
+    private void cmdModificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificaActionPerformed
+        selectedTodo = new ToDo();
+        selectedTodo.setTesto("prova");
+        selectedTodo.setDataCreazione(new Date());
+        if (selectedTodo != null) {
+            TodoEdit edit = new TodoEdit(selectedTodo, this, true);
+            edit.setLocationRelativeTo(this);
+            edit.setVisible(true);
+        }
+    }//GEN-LAST:event_cmdModificaActionPerformed
+
+    private void cmdEliminaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminaActionPerformed
+        // delete selected todo
+        JOptionPane.showMessageDialog(this, "Eliminare il todo selezionato");
+    }//GEN-LAST:event_cmdEliminaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdElimina;
+    private javax.swing.JButton cmdModifica;
+    private javax.swing.JButton cmdNuovo;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;

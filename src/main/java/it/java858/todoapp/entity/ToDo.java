@@ -5,8 +5,13 @@
  */
 package it.java858.todoapp.entity;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Entity;
@@ -23,6 +28,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 public class ToDo implements Serializable {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,7 +36,7 @@ public class ToDo implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataCreazione;
     @ManyToMany
-    private Set<Categoria> categorie;
+    private Set<Categoria> categorie = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -84,6 +90,11 @@ public class ToDo implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "ToDo{" + "id=" + id + ", testo=" + testo + ", dataCreazione=" + dataCreazione + ", categorie=" + categorie + '}';
     }
 
 }
